@@ -10,7 +10,7 @@ A simple and lightweight PHP REST API for managing tournament teams and their pa
 
 ---
 
-## 🛠 Setup & Installation
+## Setup & Installation
 
 1. Clone the repository to your local server (e.g., XAMPP, MAMP).
 2. Create a MySQL database named `tournament`.
