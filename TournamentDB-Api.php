@@ -1,5 +1,7 @@
 <?php
 header('Content-type: application/json; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS');
 
 $method = $_SERVER['REQUEST_METHOD'];
 
