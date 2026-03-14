@@ -24,6 +24,34 @@ switch ($method) {
         $arr = json_decode($in_data, true);
         $query = $db->prepare("INSERT INTO teams ( name) VALUES (:name)");
         
+        $CheckEmailStmt = $db->prepare("SELECT COUNT(*) FROM participants WHERE email = :email");
+        $CheckNicknameStmt = $db->prepare("SELECT COUNT(*) FROM participants WHERE nickname = :nickname");
+        $CheckTeamNameStmt = $db->prepare("SELECT COUNT(*) FROM teams WHERE name = :name");
+
+        $CheckTeamNameStmt->execute([':name' => $arr['team_name']]);
+
+        if ($CheckTeamNameStmt->fetchColumn() > 0) {
+            echo json_encode(["error" => 1, "message" => "Team name '" . $arr['team_name'] . "' is already taken!"]);
+            exit();
+        }
+
+        foreach ($arr['participants'] as $participant) {
+            $CheckEmailStmt->execute([':email' => $participant['email']]);
+            $CheckNicknameStmt->execute([':nickname' => $participant['nickname']]);
+
+            if ($CheckEmailStmt->fetchColumn() > 0) {
+                echo json_encode(["error" => 1, "message" => "Email already exists: " . $participant['email']]);
+                exit();
+            }
+
+            if ($CheckNicknameStmt->fetchColumn() > 0) {
+                echo json_encode(["error" => 1, "message" => "Nickname already exists: " . $participant['nickname']]);
+                exit();
+            }
+        }
+
+
+
         $query->execute([
             ':name' => $arr['team_name']
         ]);
@@ -40,7 +68,7 @@ switch ($method) {
             ]);
         }
 
-        echo json_encode(["message" => "Participants and team added successfully"]);
+        echo json_encode(["error" => 0, "message" => "Participants and team added successfully"]);
         break;
 
     case 'DELETE':
