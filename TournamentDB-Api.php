@@ -40,7 +40,7 @@ switch ($method) {
             $CheckNicknameStmt->execute([':nickname' => $participant['nickname']]);
 
             if ($CheckEmailStmt->fetchColumn() > 0) {
-                echo json_encode(["error" => 1, "message" => "Email already exists: " . $participant['email']]);
+                echo json_encode(["error" => 1, "message" => $participant['email']]);
                 exit();
             }
 
