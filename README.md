@@ -39,7 +39,9 @@ CREATE TABLE participants (
 **Endpoint:** `http://localhost/TournamentDB-Api.php` (Adjust the URL based on your server setup).
 
 ### 1. Register a Team and Participants
-Creates a new team and registers multiple players assigned to that team.
+Creates a new team and registers multiple players assigned to that team. The API performs the following checks before creating a team:
+- Team name must be unique (not already taken)
+- Each participant's email and nickname must be unique (not already registered)
 
 * **Method:** `POST`
 * **Headers:** `Content-Type: application/json`
@@ -64,9 +66,25 @@ Creates a new team and registers multiple players assigned to that team.
 **Success Response (200 OK):**
 ```json
 {
+    "error": 0,
     "message": "Participants and team added successfully"
 }
 ```
+
+**Error Responses:**
+
+- Team name already exists:
+    ```json
+    { "error": 1, "message": "Team name 'Cyber Ninjas' is already taken!" }
+    ```
+- Email already exists:
+    ```json
+    { "error": 1, "message": "shadow@tm1.edu.pl" }
+    ```
+- Nickname already exists:
+    ```json
+    { "error": 1, "message": "Nickname already exists: Shadow" }
+    ```
 
 ---
 
@@ -114,7 +132,7 @@ If you try to access the API using an unsupported HTTP method (like `GET` or `PU
 
 ## Frontend Integration Example (JavaScript)
 
-You can easily interact with this API using the native JS `fetch` API:
+You can easily interact with this API using the native JS `fetch` API. Example (see also index.js for form validation):
 
 ```javascript
 const requestData = {
@@ -132,5 +150,11 @@ fetch('http://localhost/TournamentDB-Api.php', {
     body: JSON.stringify(requestData)
 })
 .then(response => response.json())
-.then(data => console.log(data.message));
+.then(data => {
+    if(data.error) {
+        console.error(data.message);
+    } else {
+        console.log(data.message);
+    }
+});
 ```
