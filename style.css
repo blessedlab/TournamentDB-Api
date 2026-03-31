@@ -1,0 +1,218 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background-color: #0b0c10;
+    color: #c5c6c7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: radial-gradient(#ffffff0a 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 30px;
+    z-index: 10;
+}
+
+.brand {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #e6a817;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.registration {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px 40px 20px;
+}
+
+.form-container {
+    background-color: rgba(11, 12, 16, 0.95);
+    padding: 40px;
+    width: 100%;
+    max-width: 800px;
+    border-top: 5px solid #e6a817;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+}
+
+.form-container h2 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #e6a817;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #1f2833;
+    border: 1px solid #45a29e;
+    color: #ffffff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+.form-group p {
+    display: none;
+}
+
+.form-group input:focus {
+    border-color: #e6a817;
+    box-shadow: 0 0 10px rgba(230, 168, 23, 0.2);
+}
+
+/* Стили для подсветки полей с ошибками */
+.form-group input.input-error,
+.form-group-error input {
+    border-color: #ff4a4a !important;
+    box-shadow: 0 0 10px rgba(255, 74, 74, 0.3) !important;
+    animation: shake 0.4s ease-in-out;
+}
+.form-group-error p {
+    color: #ff4a4a !important;
+    display: block;
+ }
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
+
+.players-container {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.player-box {
+    flex: 1;
+    background-color: #1a1e24;
+    padding: 20px;
+    border-left: 3px solid #45a29e;
+}
+
+.player-box h3 {
+    color: #45a29e;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.submit-button {
+    width: 100%;
+    background-color: #45a29e;
+    color: #0b0c10;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    margin-top: 30px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #66fcf1;
+}
+
+.form-message {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: none;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.form-message.success {
+    color: #45a29e;
+    background-color: rgba(69, 162, 158, 0.1);
+    border: 1px solid #45a29e;
+    display: block;
+}
+
+.form-message.error {
+    color: #ff4a4a;
+    background-color: rgba(255, 74, 74, 0.1);
+    border: 1px solid #ff4a4a;
+    display: block;
+}
+
+.tournament-info {
+    margin-top: 40px;
+    text-align: center;
+    max-width: 800px;
+    background-color: rgba(11, 12, 16, 0.8);
+    padding: 20px;
+    border: 1px solid #1f2833;
+}
+
+.info-main {
+    font-size: 1.5rem;
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.info-main .divider {
+    color: #e6a817;
+    margin: 0 15px;
+}
+
+.info-warning {
+    font-size: 1.1rem;
+    color: #ff4a4a;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+    .players-container {
+        flex-direction: column;
+    }
+    .info-main {
+        font-size: 1.2rem;
+    }
+    .info-main .divider {
+        display: none;
+    }
+    .info-main span {
+        display: block;
+        margin-bottom: 5px;
+    }
+}
